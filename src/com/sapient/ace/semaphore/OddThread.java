@@ -15,7 +15,11 @@ public class OddThread extends Thread {
 	public void run() {
 		while (true) {
 			if (!signal.isSignal) {
-				customizedSemaphore.acquire();
+				try {
+					customizedSemaphore.acquire();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				Random random = new Random();
 				int num = random.nextInt() % 10;
 				if (num % 2 == 0) {

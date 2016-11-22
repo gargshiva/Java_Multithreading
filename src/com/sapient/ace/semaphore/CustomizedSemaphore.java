@@ -11,13 +11,9 @@ public class CustomizedSemaphore {
 		this.permits = permits;
 	}
 
-	public synchronized void acquire() {
-			while (permits < 1) {
-			try {
-				this.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+	public synchronized void acquire() throws InterruptedException {
+		while (permits < 1) {
+			this.wait();
 		}
 
 		if (permits >= 1) {
